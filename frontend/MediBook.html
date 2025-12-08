@@ -1,43 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediBook</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediBook – Reservas Médicas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/logomin.png">
 </head>
+
 <body>
+    <header>
+        <img src="./assets/logo.png" alt="logo"/>
+        <span>Reservas Médicas</span>
+        <button>Medicamentos</button>
+    </header>
 
-    <h1>Lista de Doctores</h1>
-    <pre id="doctores"></pre>
+    <div class="bienvenida">
+        <p>Bienvenido a MediBook, aquí podras reservar tu cita médica, recuerda reservar tu cita médica con anticipación.</p>
+        <p>En MediBook nos preocupamos por tu salud y por tu bolsillo. Para ello, ofrecemos servicios accesibles y de calidad para todos. Con medicos de confianza y atención personalizada.</p>
+    </div>
 
-    <h1>Lista de Pacientes</h1>
-    <pre id="pacientes"></pre>
+    <div class="container">
 
-    <script>
-        // Todo esto acá son la conexion de los doctores
-        fetch("http://localhost:3000/doctores")
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById("doctores").textContent =
-                    JSON.stringify(data, null, 2);
-            })
-            .catch(() => {
-                document.getElementById("doctores").textContent =
-                    "No se pudo cargar doctores";
-            });
+        <!-- Registro de pacientes -->
+        <div class="card">
+            <h2>Registro de Paciente</h2>
+            <input id="regNombre" placeholder="Nombre completo" />
+            <input id="regEmail" placeholder="Correo" />
+            <button onclick="registrarPaciente()">Registrarme</button>
+            <div id="regRespuesta" class="result-box"></div>
+        </div>
 
-        // y acá la de los pacientes
-        fetch("http://localhost:3000/pacientes")
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById("pacientes").textContent =
-                    JSON.stringify(data, null, 2);
-            })
-            .catch(() => {
-                document.getElementById("pacientes").textContent =
-                    "No se pudo cargar pacientes";
-            });
-    </script>
+        <!-- Login Paciente -->
+        <div class="card">
+            <h2>Iniciar Sesión</h2>
+            <input id="loginEmail" placeholder="Correo" />
+            <button onclick="loginPaciente()">Ingresar</button>
+            <div id="loginRespuesta" class="result-box"></div>
+        </div>
 
+        <!-- Reservar Cita -->
+        <div class="card">
+            <h2>Reservar Cita</h2>
+
+            <!-- Select dinámico de especialidades -->
+            <select id="selEspecialidad"></select>
+
+            <!-- Lista de doctores según la especialidad -->
+            <select id="selDoctor"></select>
+
+            <!-- Fecha y hora -->
+            <input id="selFecha" type="datetime-local" />
+
+            <button onclick="reservarCita()">Reservar</button>
+            <div id="reservaRespuesta" class="result-box"></div>
+        </div>
+    </div>
+
+
+    <footer>
+        <img src="./assets/logomin.png" alt="logo">
+        <p>MediBook © 2025</p>
+    </footer>
+    <script src="./app.js"></script>
 </body>
+
 </html>
