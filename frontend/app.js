@@ -155,6 +155,15 @@ async function reservarCita() {
   }
 }
 
+async function Medicamentos() {
+  Swal.fire({
+  icon: "error",
+  title: "No hay medicamentos disponibles",
+  text: "Vaya a la farmacia, yo le aviso cuando haya más.",
+});
+
+}
+
 // ==============================
 //  Cuando carga la página:
 //  - cargar especialidades automáticamente

@@ -44,7 +44,6 @@ header img {
     color: var(--dark);
     padding: 20px 0;
     background: var(--light);
-    border-bottom: 2px solid var(--primary);
 }
 
 .container {
