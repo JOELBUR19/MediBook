@@ -33,11 +33,8 @@ async function registrarPaciente() {
   }
 }
 
-// ==============================
-//    LOGIN PACIENTE (SIMPLIFICADO)
-//      Tu backend NO tiene login,
-//      así que buscamos por email
-// ==============================
+// Busqueda de paciente por email
+
 async function loginPaciente() {
   const email = document.getElementById("loginEmail").value.trim();
   const box = document.getElementById("loginRespuesta");
@@ -119,7 +116,7 @@ document
   .addEventListener("change", cargarDoctores);
 
 // ==============================
-//   5️⃣ RESERVAR CITA
+//    RESERVAR CITA
 // ==============================
 async function reservarCita() {
   const doctorId = document.getElementById("selDoctor").value;

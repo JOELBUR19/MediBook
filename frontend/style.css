@@ -1,10 +1,6 @@
-/* Acá creen ustedes los estilos de la pagina, ya estan conectados con el frontend */
-/* 🎨 Estilos principales para MediBook */
 :root {
     --primary: #0a7acc;
-    /* Azul médico */
     --secondary: #0fb9b1;
-    /* Verde salud */
     --light: #f5f9fc;
     --dark: #1d2d50;
     --radius: 12px;
@@ -21,9 +17,34 @@ header {
     background: var(--primary);
     padding: 18px;
     color: white;
-    text-align: center;
+    text-align: left;
     font-size: 1.6rem;
     font-weight: bold;
+}
+
+header button {
+    float: right;
+}
+
+header span {
+    font-size: 0.8rem;
+}
+
+header img {
+    height: 50px;
+    vertical-align: left;
+    margin-left: 10px;
+}
+
+.bienvenida {
+    width: 100%;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    color: var(--dark);
+    padding: 20px 0;
+    background: var(--light);
+    border-bottom: 2px solid var(--primary);
 }
 
 .container {
@@ -47,7 +68,7 @@ h2 {
 
 input,
 select {
-    width: 100%;
+    width: 98%;
     padding: 10px;
     margin-top: 8px;
     margin-bottom: 12px;
@@ -75,4 +96,19 @@ button:hover {
     padding: 15px;
     border-radius: var(--radius);
     margin-top: 10px;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    font-size: 0.9rem;
+}
+
+footer img {
+    height: 40px;
+    margin-right: 10px;
 }

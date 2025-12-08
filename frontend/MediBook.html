@@ -5,18 +5,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MediBook – Reservas Médicas</title>
-
-    <!-- Vincular archivo CSS externo -->
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/logomin.png">
 </head>
 
 <body>
-    <!-- Encabezado principal -->
-    <header>MediBook – Sistema de Reservas</header>
+    <header>
+        <img src="./assets/logo.png" alt="logo"/>
+        <span>Reservas Médicas</span>
+        <button>Medicamentos</button>
+    </header>
+
+    <div class="bienvenida">
+        <p>Bienvenido a MediBook, aquí podras reservar tu cita médica, recuerda reservar tu cita médica con anticipación.</p>
+        <p>En MediBook nos preocupamos por tu salud y por tu bolsillo. Para ello, ofrecemos servicios accesibles y de calidad para todos. Con medicos de confianza y atención personalizada.</p>
+    </div>
 
     <div class="container">
 
-        <!-- 🧍 Registro Paciente -->
+        <!-- Registro de pacientes -->
         <div class="card">
             <h2>Registro de Paciente</h2>
             <input id="regNombre" placeholder="Nombre completo" />
@@ -25,7 +32,7 @@
             <div id="regRespuesta" class="result-box"></div>
         </div>
 
-        <!-- 🔐 Login Paciente -->
+        <!-- Login Paciente -->
         <div class="card">
             <h2>Iniciar Sesión</h2>
             <input id="loginEmail" placeholder="Correo" />
@@ -33,7 +40,7 @@
             <div id="loginRespuesta" class="result-box"></div>
         </div>
 
-        <!-- 📅 Reservar Cita -->
+        <!-- Reservar Cita -->
         <div class="card">
             <h2>Reservar Cita</h2>
 
@@ -49,10 +56,13 @@
             <button onclick="reservarCita()">Reservar</button>
             <div id="reservaRespuesta" class="result-box"></div>
         </div>
-
     </div>
 
-    <!-- JavaScript separado para mantener limpio el HTML -->
+
+    <footer>
+        <img src="./assets/logomin.png" alt="logo">
+        <p>MediBook © 2025</p>
+    </footer>
     <script src="./app.js"></script>
 </body>
 
