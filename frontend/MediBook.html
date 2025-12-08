@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediBook</title>
+</head>
+<body>
+
+    <h1>Lista de Doctores</h1>
+    <pre id="doctores"></pre>
+
+    <h1>Lista de Pacientes</h1>
+    <pre id="pacientes"></pre>
+
+    <script>
+        // Todo esto acá son la conexion de los doctores
+        fetch("http://localhost:3000/doctores")
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("doctores").textContent =
+                    JSON.stringify(data, null, 2);
+            })
+            .catch(() => {
+                document.getElementById("doctores").textContent =
+                    "No se pudo cargar doctores";
+            });
+
+        // y acá la de los pacientes
+        fetch("http://localhost:3000/pacientes")
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("pacientes").textContent =
+                    JSON.stringify(data, null, 2);
+            })
+            .catch(() => {
+                document.getElementById("pacientes").textContent =
+                    "No se pudo cargar pacientes";
+            });
+    </script>
+
+</body>
+</html>

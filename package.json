@@ -1,0 +1,34 @@
+{
+  "name": "nodejstallerp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --watch ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "p:s": "npx prisma studio",
+    "p:g": "npx prisma generate",
+    "p:p": "npx prisma db push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JOELBUR19/TrabajoFrontBack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JOELBUR19/TrabajoFrontBack/issues"
+  },
+  "homepage": "https://github.com/JOELBUR19/TrabajoFrontBack#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "prisma": "^6.19.0"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.19.0"
+  }
+}
