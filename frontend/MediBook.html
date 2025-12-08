@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediBook</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediBook – Reservas Médicas</title>
+
+    <!-- Vincular archivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- Encabezado principal -->
+    <header>MediBook – Sistema de Reservas</header>
 
-    <h1>Lista de Doctores</h1>
-    <pre id="doctores"></pre>
+    <div class="container">
 
-    <h1>Lista de Pacientes</h1>
-    <pre id="pacientes"></pre>
+        <!-- 🧍 Registro Paciente -->
+        <div class="card">
+            <h2>Registro de Paciente</h2>
+            <input id="regNombre" placeholder="Nombre completo" />
+            <input id="regEmail" placeholder="Correo" />
+            <button onclick="registrarPaciente()">Registrarme</button>
+            <div id="regRespuesta" class="result-box"></div>
+        </div>
 
-    <script>
-        // Todo esto acá son la conexion de los doctores
-        fetch("http://localhost:3000/doctores")
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById("doctores").textContent =
-                    JSON.stringify(data, null, 2);
-            })
-            .catch(() => {
-                document.getElementById("doctores").textContent =
-                    "No se pudo cargar doctores";
-            });
+        <!-- 🔐 Login Paciente -->
+        <div class="card">
+            <h2>Iniciar Sesión</h2>
+            <input id="loginEmail" placeholder="Correo" />
+            <button onclick="loginPaciente()">Ingresar</button>
+            <div id="loginRespuesta" class="result-box"></div>
+        </div>
 
-        // y acá la de los pacientes
-        fetch("http://localhost:3000/pacientes")
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById("pacientes").textContent =
-                    JSON.stringify(data, null, 2);
-            })
-            .catch(() => {
-                document.getElementById("pacientes").textContent =
-                    "No se pudo cargar pacientes";
-            });
-    </script>
+        <!-- 📅 Reservar Cita -->
+        <div class="card">
+            <h2>Reservar Cita</h2>
 
+            <!-- Select dinámico de especialidades -->
+            <select id="selEspecialidad"></select>
+
+            <!-- Lista de doctores según la especialidad -->
+            <select id="selDoctor"></select>
+
+            <!-- Fecha y hora -->
+            <input id="selFecha" type="datetime-local" />
+
+            <button onclick="reservarCita()">Reservar</button>
+            <div id="reservaRespuesta" class="result-box"></div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript separado para mantener limpio el HTML -->
+    <script src="app.js"></script>
 </body>
+
 </html>
