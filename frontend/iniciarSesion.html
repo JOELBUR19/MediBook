@@ -32,20 +32,21 @@
     </div>
 
     <div class="container">
+      <!-- Registro de pacientes -->
       <div class="card">
-        <h2>Reservar Cita</h2>
+        <h2>Registro de Paciente</h2>
+        <input id="regNombre" placeholder="Nombre completo" />
+        <input id="regEmail" placeholder="Correo" />
+        <button onclick="registrarPaciente()">Registrarme</button>
+        <div id="regRespuesta" class="result-box"></div>
+      </div>
 
-        <!-- Select dinámico de especialidades -->
-        <select id="selEspecialidad"></select>
-
-        <!-- Lista de doctores según la especialidad -->
-        <select id="selDoctor"></select>
-
-        <!-- Fecha y hora -->
-        <input id="selFecha" type="datetime-local" />
-
-        <button onclick="reservarCita()">Reservar</button>
-        <div id="reservaRespuesta" class="result-box"></div>
+      <!-- Login Paciente -->
+      <div class="card">
+        <h2>Iniciar Sesión</h2>
+        <input id="loginEmail" placeholder="Correo" />
+        <button onclick="loginPaciente()">Ingresar</button>
+        <div id="loginRespuesta" class="result-box"></div>
       </div>
     </div>
 

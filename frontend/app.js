@@ -54,12 +54,43 @@ async function loginPaciente() {
     if (encontrado) {
       box.innerText = `✅ Bienvenido, ${encontrado.nombre}`;
       localStorage.setItem("pacienteId", encontrado.id);
+      actualizarBotonLogout();
     } else {
       box.innerText = "❌ Correo no encontrado.";
     }
   } catch (error) {
     box.innerText = "❌ Error conectando al servidor.";
   }
+}
+
+function logout() {
+  const pacienteId = localStorage.getItem("pacienteId");
+
+  if (!pacienteId) {
+    Swal.fire({
+      icon: "error",
+      title: "No había una sesión abierta",
+      text: "Por favor, inicie sesión.",
+    });
+    return;
+  }
+
+  localStorage.removeItem("pacienteId");
+
+  Swal.fire({
+    icon: "success",
+    title: "Sesión cerrada correctamente",
+    text: "¡Hasta pronto!",
+  });
+
+  actualizarBotonLogout();
+}
+
+function actualizarBotonLogout() {
+  const btn = document.getElementById("btnLogout");
+  const sesionActiva = localStorage.getItem("pacienteId");
+
+  btn.style.display = sesionActiva ? "block" : "none";
 }
 
 // ==============================
@@ -111,7 +142,8 @@ async function cargarDoctores() {
 }
 
 // Escuchar cambios
-document.getElementById("selEspecialidad")
+document
+  .getElementById("selEspecialidad")
   .addEventListener("change", cargarDoctores);
 
 // ==============================
@@ -123,8 +155,9 @@ async function reservarCita() {
   const pacienteId = localStorage.getItem("pacienteId");
   const box = document.getElementById("reservaRespuesta");
 
-  if (!pacienteId) return box.innerText = " Debes iniciar sesión primero.";
-  if (!doctorId || !fecha) return box.innerText = " Todos los campos son obligatorios.";
+  if (!pacienteId) return (box.innerText = " Debes iniciar sesión primero.");
+  if (!doctorId || !fecha)
+    return (box.innerText = " Todos los campos son obligatorios.");
 
   try {
     const res = await fetch(`${API}/citas`, {
@@ -141,7 +174,9 @@ async function reservarCita() {
     const data = await res.json();
 
     if (res.ok) {
-      box.innerText = ` Cita registrada para el ${new Date(data.fecha).toLocaleString()}`;
+      box.innerText = ` Cita registrada para el ${new Date(
+        data.fecha
+      ).toLocaleString()}`;
     } else {
       box.innerText = " Error al reservar la cita.";
     }
@@ -180,10 +215,16 @@ async function cargarCitas() {
       .map(
         (c) => `
           <div>
-            <p><strong>Paciente:</strong> ${c.paciente?.nombre ?? "Desconocido"}</p>
-            <p><strong>Fecha / Hora:</strong> ${new Date(c.fecha).toLocaleString()}</p>
+            <p><strong>Paciente:</strong> ${
+              c.paciente?.nombre ?? "Desconocido"
+            }</p>
+            <p><strong>Fecha / Hora:</strong> ${new Date(
+              c.fecha
+            ).toLocaleString()}</p>
             <p><strong>Doctor:</strong> ${c.doctor?.nombre ?? "No asignado"}</p>
-            <p><strong>Especialidad:</strong> ${c.doctor?.especialidad ?? "Sin especialidad"}</p>
+            <p><strong>Especialidad:</strong> ${
+              c.doctor?.especialidad ?? "Sin especialidad"
+            }</p>
             <hr>
           </div>
         `
@@ -195,7 +236,6 @@ async function cargarCitas() {
 }
 
 window.cargarCitas = cargarCitas;
-
 
 // ==============================
 //    EJECUTAR AL CARGAR
