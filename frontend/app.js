@@ -33,8 +33,9 @@ async function registrarPaciente() {
   }
 }
 
-// Busqueda de paciente por email
-
+// ==============================
+//    LOGIN PACIENTE
+// ==============================
 async function loginPaciente() {
   const email = document.getElementById("loginEmail").value.trim();
   const box = document.getElementById("loginRespuesta");
@@ -71,7 +72,6 @@ async function cargarEspecialidades() {
     const res = await fetch(`${API}/doctores`);
     const doctores = await res.json();
 
-    // Obtener especialidades únicas
     const especialidades = [...new Set(doctores.map((d) => d.especialidad))];
 
     sel.innerHTML = "<option value=''>Seleccione especialidad</option>";
@@ -110,9 +110,8 @@ async function cargarDoctores() {
   }
 }
 
-// Escuchar cambio de especialidad
-document
-  .getElementById("selEspecialidad")
+// Escuchar cambios
+document.getElementById("selEspecialidad")
   .addEventListener("change", cargarDoctores);
 
 // ==============================
@@ -124,10 +123,8 @@ async function reservarCita() {
   const pacienteId = localStorage.getItem("pacienteId");
   const box = document.getElementById("reservaRespuesta");
 
-  if (!pacienteId) return (box.innerText = " Debes iniciar sesión primero.");
-
-  if (!doctorId || !fecha)
-    return (box.innerText = " Todos los campos son obligatorios.");
+  if (!pacienteId) return box.innerText = " Debes iniciar sesión primero.";
+  if (!doctorId || !fecha) return box.innerText = " Todos los campos son obligatorios.";
 
   try {
     const res = await fetch(`${API}/citas`, {
@@ -137,16 +134,14 @@ async function reservarCita() {
         fecha,
         pacienteId: Number(pacienteId),
         doctorId: Number(doctorId),
-        consultorioId: 1, // si quieres luego lo hacemos dinámico
+        consultorioId: 1,
       }),
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      box.innerText = ` Cita registrada para el ${new Date(
-        data.fecha
-      ).toLocaleString()}`;
+      box.innerText = ` Cita registrada para el ${new Date(data.fecha).toLocaleString()}`;
     } else {
       box.innerText = " Error al reservar la cita.";
     }
@@ -155,17 +150,54 @@ async function reservarCita() {
   }
 }
 
+// ==============================
+//    MENSAJE MEDICAMENTOS
+// ==============================
 async function Medicamentos() {
   Swal.fire({
-  icon: "error",
-  title: "No hay medicamentos disponibles",
-  text: "Vaya a la farmacia, yo le aviso cuando haya más.",
-});
-
+    icon: "error",
+    title: "No hay medicamentos disponibles",
+    text: "Vaya a la farmacia, yo le aviso cuando haya más.",
+  });
 }
 
 // ==============================
-//  Cuando carga la página:
-//  - cargar especialidades automáticamente
+//    CARGAR TODAS LAS CITAS (GENERAL)
+// ==============================
+async function cargarCitas() {
+  const box = document.getElementById("listaCitas");
+
+  try {
+    const res = await fetch(`${API}/citas`);
+    const citas = await res.json();
+
+    if (!Array.isArray(citas) || citas.length === 0) {
+      box.innerHTML = "<p>No hay citas registradas.</p>";
+      return;
+    }
+
+    box.innerHTML = citas
+      .map(
+        (c) => `
+          <div>
+            <p><strong>Paciente:</strong> ${c.paciente?.nombre ?? "Desconocido"}</p>
+            <p><strong>Fecha / Hora:</strong> ${new Date(c.fecha).toLocaleString()}</p>
+            <p><strong>Doctor:</strong> ${c.doctor?.nombre ?? "No asignado"}</p>
+            <p><strong>Especialidad:</strong> ${c.doctor?.especialidad ?? "Sin especialidad"}</p>
+            <hr>
+          </div>
+        `
+      )
+      .join("");
+  } catch (error) {
+    box.innerHTML = "<p>Error al cargar las citas.</p>";
+  }
+}
+
+window.cargarCitas = cargarCitas;
+
+
+// ==============================
+//    EJECUTAR AL CARGAR
 // ==============================
 cargarEspecialidades();

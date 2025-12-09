@@ -15,7 +15,18 @@ export const crearDoctor = async (req, res) => {
 
 export const getDoctores = async (req, res) => {
   try {
-    const doctores = await prisma.doctor.findMany();
+    const { especialidad } = req.query;
+
+    const doctores = await prisma.doctor.findMany({
+      where: especialidad
+        ? {
+            especialidad: {
+              equals: especialidad,
+              mode: "insensitive" 
+            }
+          }
+        : {}
+    });
     res.json(doctores);
   } catch (err) {
     res.status(400).json({ message: "Error al obtener los doctores" });

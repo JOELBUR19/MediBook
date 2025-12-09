@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediBook – Reservas Médicas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/logomin.png">
+</head>
+
+<body>
+    <header>
+        <a href="MediBook.html"><img src="./assets/logo.png" alt="logo"/></a>
+        <span>Reservas Médicas</span>
+        <a href="CitasSistema.html"><button>Citas</button></a>
+        <button onclick="Medicamentos()">Medicamentos</button>
+    </header>
+
+    <div class="bienvenida">
+        <p>Bienvenido al sistema de citas médicas.</p>
+        <p>Aqui podras ver las citas médicas que se han reservado. Esta función esta en desarrollo por lo que podrias encontrar algunos errores. Si es el caso, te pedimos disculpas, trabajamos para mejorarla pronto.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Sistema de Citas -->
+        <div class="card">
+            <h2>Sistema de Citas Médicas en el sistema (General)</h2>
+
+            <div id="listaCitas"></div>
+
+            <button onclick="cargarCitas()">Cargar Citas</button>
+            <div id="citasRespuesta" class="result-box"></div>
+        </div>
+    </div>
+
+
+    <footer>
+        <img src="./assets/logomin.png" alt="logo">
+        <p>MediBook © 2025</p>
+    </footer>
+    <script src="./app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
